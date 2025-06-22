@@ -10,6 +10,9 @@ const PORT = process.env.PORT || 5001;
 
 connectDB();
 
+// Middleware to parse JSON bodies
+app.use(express.json());
+
 // Master Routes
 app.use("/api/notes", notesRoutes);
 
