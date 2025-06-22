@@ -2,7 +2,7 @@ import Note from "../models/Note.js";
 
 export async function getAllNotes(req, res) {
   try {
-    const notes = await Note.find();
+    const notes = await Note.find().sort({ createdAt: -1 }); // Sort by createdAt in descending order
     res.status(200).json(notes);
   } catch (error) {
     console.error("Error fetching notes:", error);
@@ -53,5 +53,19 @@ export async function deleteNote(req, res) {
   } catch (error) {
     console.error("Error deleting note:", error);
     res.status(500).json({ message: "Error deleting note", error: error.message });
+  }
+}
+
+export async function getNoteById(req, res) {
+  try {
+    const { id } = req.params;
+    const note = await Note.findById(id);
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+    res.status(200).json(note);
+  } catch (error) {
+    console.error("Error fetching note by ID:", error);
+    res.status(500).json({ message: "Error fetching note", error: error.message });
   }
 }
