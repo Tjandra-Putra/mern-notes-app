@@ -1,6 +1,7 @@
 import Note from "../models/Note.js";
 
-export async function getAllNotes(req, res) {
+export async function getAllNotes(_, res) {
+  // _ to skip the unused request parameter
   try {
     const notes = await Note.find().sort({ createdAt: -1 }); // Sort by createdAt in descending order
     res.status(200).json(notes);
