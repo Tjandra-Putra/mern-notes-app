@@ -1,11 +1,45 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import Navbar from "@/components/Navbar";
+import { useEffect, useState } from "react";
+import RateLimitedAlert from "@/components/RateLimitedAlert";
+import TodoGrid from "@/components/TodoGrid";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const HomePage = () => {
+  const [isRateLimited, setIsRateLimited] = useState(false);
+  const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchNotes = async () => {
+      try {
+        const response = await axios.get("http://localhost:5001/api/notes");
+        const data = response.data;
+
+        setNotes(data);
+        setIsRateLimited(false);
+
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching notes:", error);
+
+        if (error.response?.status === 429) {
+          setIsRateLimited(true);
+        } else {
+          toast.error("Failed to fetch notes. Please try again later.");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNotes();
+  }, []);
+
   return (
-    <div className="min-h-screen">
-      <Navbar />
+    <div className="">
+      {isRateLimited && <RateLimitedAlert />}
+
+      <TodoGrid data={notes} />
     </div>
   );
 };
