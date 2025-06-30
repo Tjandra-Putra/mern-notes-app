@@ -13,6 +13,12 @@ const noteSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    status: {
+      type: String,
+      enum: ["Doing", "Todo", "Done", "Draft"],
+      default: "Todo",
+    },
+    category
   },
   {
     timestamps: true, //createdAt, updatedAt
