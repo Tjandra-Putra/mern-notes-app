@@ -142,7 +142,10 @@
     "zod": "^3.25.67"
   },
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "author": "",
   "license": "MIT",
