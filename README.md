@@ -1,6 +1,6 @@
-# Project Setup and Running Instructions
+# Simple MERN Project demonstrating CRUD, rate limiting, responsive design and best practices
 
-## Environment Variables Setup
+### Environment Variables Setup
 
 Create a `.env` file in the **root of the backend folder** and add the following variables:
 
