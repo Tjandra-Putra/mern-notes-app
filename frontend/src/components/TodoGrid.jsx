@@ -12,7 +12,7 @@ const COLUMNS = [
 
 const sortByNewest = (a, b) => new Date(b.createdAt) - new Date(a.createdAt);
 
-export default function TodoGrid({ data = [], onStatusChange, onDelete, onAddNote }) {
+export default function TodoGrid({ data = [], setNotes }) {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {COLUMNS.map(({ key, label, bg, badge }) => {
@@ -24,7 +24,7 @@ export default function TodoGrid({ data = [], onStatusChange, onDelete, onAddNot
               <Badge className={`${badge} rounded-full`}>{label}</Badge>
 
               {/* Add Todo Button */}
-              <AddToDo status={key} onNewNoteChange={onAddNote} />
+              <AddToDo status={key} setNotes={setNotes} />
             </header>
 
             {/* scroll area */}
@@ -32,7 +32,7 @@ export default function TodoGrid({ data = [], onStatusChange, onDelete, onAddNot
               {items.length === 0 ? (
                 <p className="text-xs text-gray-500 italic self-center">No items in this column</p>
               ) : (
-                items.map((item) => <TodoCard key={item._id} {...item} onStatusChange={onStatusChange} onDelete={onDelete} />)
+                items.map((item) => <TodoCard key={item._id} {...item} setNotes={setNotes} />)
               )}
             </div>
           </section>

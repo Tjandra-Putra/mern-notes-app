@@ -22,7 +22,7 @@ const FormSchema = z.object({
   }),
 });
 
-export default function AddToDo({ status, onNewNoteChange }) {
+export default function AddToDo({ status, setNotes }) {
   // This is to get state changes from child components
 
   const form = useForm({
@@ -49,7 +49,7 @@ export default function AddToDo({ status, onNewNoteChange }) {
       console.log("Todo added:", response.data);
 
       // Inform parent about the new note, passing full note from response
-      onNewNoteChange(response.data);
+      setNotes((prev) => [response.data, ...prev]);
       form.reset(); // Reset the form after successful submission
     } catch (error) {
       toast(`Error: ${error.message}`, {

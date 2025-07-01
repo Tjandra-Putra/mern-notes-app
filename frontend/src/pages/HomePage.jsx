@@ -9,14 +9,6 @@ const HomePage = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // ---- this is to get the state changes from child components ----
-  const handleStatusChange = (id, newStatus) => setNotes((prev) => prev.map((n) => (n._id === id ? { ...n, status: newStatus } : n)));
-
-  const handleDelete = (id) => setNotes((prev) => prev.filter((n) => n._id !== id));
-
-  // NEW: add todo handler
-  const handleAddNote = (newNote) => setNotes((prev) => [newNote, ...prev]);
-
   useEffect(() => {
     const fetchNotes = async () => {
       try {
@@ -48,8 +40,8 @@ const HomePage = () => {
       {isRateLimited && <RateLimitedAlert />}
 
       {loading && "Loading..."}
-
-      {!isRateLimited && !loading && <TodoGrid data={notes} onStatusChange={handleStatusChange} onDelete={handleDelete} onAddNote={handleAddNote} />}
+      {/* onDelete={handleDelete}  */}
+      {!isRateLimited && !loading && <TodoGrid data={notes} setNotes={setNotes} />}
     </div>
   );
 };

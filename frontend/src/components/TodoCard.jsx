@@ -7,7 +7,7 @@ import axiosInstance from "@/lib/axios";
 import { useState } from "react";
 import { toast } from "sonner";
 
-const TodoCard = ({ category, createdAt, title, description, _id, status, onStatusChange, onDelete }) => {
+const TodoCard = ({ category, createdAt, title, description, _id, status, setNotes }) => {
   const [isDone, setIsDone] = useState(status === "Done");
 
   const updateStatus = async (checked) => {
@@ -18,7 +18,9 @@ const TodoCard = ({ category, createdAt, title, description, _id, status, onStat
 
     try {
       await axiosInstance.put(`/notes/${_id}`, { status: newStatus });
-      onStatusChange(_id, newStatus); // ← tell parent
+      // onStatusChange(_id, newStatus); // ← tell parent
+
+      setNotes((prev) => prev.map((note) => (note._id === _id ? { ...note, status: newStatus } : note))); // ← update local state
 
       setIsDone(checked);
       toast.success(`Todo marked as ${newStatus.toLowerCase()}`);
@@ -35,7 +37,7 @@ const TodoCard = ({ category, createdAt, title, description, _id, status, onStat
       await axiosInstance.delete(`/notes/${_id}`).then((res) => {
         console.log("Response from server:", res.data.message);
       });
-      onDelete(_id); // ← tell parent to remove this todo
+      setNotes((prev) => prev.filter((note) => note._id !== _id)); // ← tell parent to remove this todo
       toast.success("Todo deleted successfully");
     } catch (err) {
       console.error("Error deleting todo:", err);
