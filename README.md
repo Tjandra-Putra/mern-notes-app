@@ -1,4 +1,4 @@
-# Simple MERN Project demonstrating CRUD, rate limiting, responsive design and best practices
+## Simple MERN Project demonstrating CRUD, rate limiting, responsive design and best practices
 
 ### Environment Variables Setup
 
