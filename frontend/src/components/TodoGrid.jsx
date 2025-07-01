@@ -21,7 +21,7 @@ export default function TodoGrid({ data = [], onStatusChange, onDelete, onAddNot
         return (
           <section key={key} className={`flex flex-col rounded-lg border bg-card text-card-foreground ${bg}`}>
             <header className="border-b px-4 py-2 text-sm font-semibold flex items-center justify-between">
-              <Badge className={badge}>{label}</Badge>
+              <Badge className={`${badge} rounded-full`}>{label}</Badge>
 
               {/* Add Todo Button */}
               <AddToDo status={key} onNewNoteChange={onAddNote} />
