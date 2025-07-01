@@ -1,8 +1,5 @@
 import React from "react";
 
-import AddToDo from "@/components/AddToDo";
-import { Button } from "./ui/button";
-// Refresh Icon
 import { RefreshCcw } from "lucide-react";
 
 const Navbar = () => {
@@ -16,7 +13,7 @@ const Navbar = () => {
           </div>
 
           <div className="flex justify-end items-center gap-4">
-            <AddToDo />
+            {/* <AddToDo /> */}
 
             {/* Refresh Button */}
             <div

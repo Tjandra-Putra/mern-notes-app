@@ -1,6 +1,7 @@
 import React from "react";
 import TodoCard from "@/components/TodoCard";
 import { Badge } from "@/components/ui/badge";
+import AddToDo from "@/components/AddToDo";
 
 const COLUMNS = [
   { key: "Draft", label: "Draft", bg: "bg-gray-50", badge: "bg-gray-700" },
@@ -11,7 +12,7 @@ const COLUMNS = [
 
 const sortByNewest = (a, b) => new Date(b.createdAt) - new Date(a.createdAt);
 
-export default function TodoGrid({ data = [], onStatusChange, onDelete }) {
+export default function TodoGrid({ data = [], onStatusChange, onDelete, onAddNote }) {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {COLUMNS.map(({ key, label, bg, badge }) => {
@@ -19,8 +20,11 @@ export default function TodoGrid({ data = [], onStatusChange, onDelete }) {
 
         return (
           <section key={key} className={`flex flex-col rounded-lg border bg-card text-card-foreground ${bg}`}>
-            <header className="border-b px-4 py-2 text-sm font-semibold">
+            <header className="border-b px-4 py-2 text-sm font-semibold flex items-center justify-between">
               <Badge className={badge}>{label}</Badge>
+
+              {/* Add Todo Button */}
+              <AddToDo status={key} onNewNoteChange={onAddNote} />
             </header>
 
             {/* scroll area */}

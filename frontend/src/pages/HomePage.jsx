@@ -14,6 +14,9 @@ const HomePage = () => {
 
   const handleDelete = (id) => setNotes((prev) => prev.filter((n) => n._id !== id));
 
+  // NEW: add todo handler
+  const handleAddNote = (newNote) => setNotes((prev) => [newNote, ...prev]);
+
   useEffect(() => {
     const fetchNotes = async () => {
       try {
@@ -46,7 +49,7 @@ const HomePage = () => {
 
       {loading && "Loading..."}
 
-      {!isRateLimited && !loading && <TodoGrid data={notes} onStatusChange={handleStatusChange} onDelete={handleDelete} />}
+      {!isRateLimited && !loading && <TodoGrid data={notes} onStatusChange={handleStatusChange} onDelete={handleDelete} onAddNote={handleAddNote} />}
     </div>
   );
 };

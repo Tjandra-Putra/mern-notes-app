@@ -59,9 +59,9 @@ const TodoCard = ({ category, createdAt, title, description, _id, status, onStat
         <h2 className="text-sm font-medium leading-tight">{title}</h2>
         <p className="text-xs text-gray-800 mt-2">{description}</p>
         <div className="mt-4 flex justify-end">
-          <Button variant="outline" size="sm" className="mr-2" onClick={() => console.log("Edit clicked")}>
+          {/* <Button variant="outline" size="sm" className="mr-2" onClick={() => console.log("Edit clicked")}>
             Edit
-          </Button>
+          </Button> */}
           <Button variant="secondary" size="sm" onClick={deleteTodo} className="hover:bg-red-500 hover:text-white">
             Delete
           </Button>

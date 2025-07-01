@@ -22,14 +22,16 @@ const FormSchema = z.object({
   }),
 });
 
-export default function AddToDo() {
+export default function AddToDo({ status, onNewNoteChange }) {
+  // This is to get state changes from child components
+
   const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       title: "",
       description: "",
       category: "Other",
-      status: "Draft",
+      status: status || "Draft",
     },
   });
 
@@ -45,6 +47,9 @@ export default function AddToDo() {
         ),
       });
       console.log("Todo added:", response.data);
+
+      // Inform parent about the new note, passing full note from response
+      onNewNoteChange(response.data);
       form.reset(); // Reset the form after successful submission
     } catch (error) {
       toast(`Error: ${error.message}`, {
@@ -56,9 +61,8 @@ export default function AddToDo() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="flex items-center gap-2 rounded bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 cursor-pointer h-10">
+        <div className="flex items-center gap-2  border border-dashed border-gray-600 p-2 text-black transition-colors hover:bg-black hover:text-white cursor-pointer text-xs rounded-full">
           <Plus className="h-4 w-4" />
-          Add Todo
         </div>
       </DialogTrigger>
 
@@ -120,7 +124,7 @@ export default function AddToDo() {
                   <FormItem className="flex-1">
                     <FormLabel>Status</FormLabel>
                     <FormControl>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select onValueChange={field.onChange} defaultValue={field.value} disabled>
                         <SelectTrigger>
                           <SelectValue placeholder="Select status" />
                         </SelectTrigger>
