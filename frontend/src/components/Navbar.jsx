@@ -28,7 +28,7 @@ const Navbar = () => {
 
   return (
     <header className="dark:bg-gray-950/90">
-      <div className="w-full py-6">
+      <div className="w-full pt-6">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">My Todos</h1>

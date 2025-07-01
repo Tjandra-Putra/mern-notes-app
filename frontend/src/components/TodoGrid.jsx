@@ -14,7 +14,7 @@ const sortByNewest = (a, b) => new Date(b.createdAt) - new Date(a.createdAt);
 
 export default function TodoGrid({ data = [], setNotes }) {
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 py-6">
       {COLUMNS.map(({ key, label, bg, badge }) => {
         const items = data.filter((i) => i.status === key).sort(sortByNewest);
 
