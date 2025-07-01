@@ -51,11 +51,20 @@ npm run start
 
 ---
 
-### Access the Application
+### Access the Application (Development)
 
-Once running, the app will be available at:  
-[http://localhost:5001/](http://localhost:5001/)
+Once running, the app will be available at:
+```
+Frontend: http://localhost:5173
+Backend: http://localhost:5001
+```
 
+### Access the Application (Production)
+
+Once running, the app will be available at:
+```
+Frontend & Backend: http://localhost:5001
+```
 ---
 
 ### Preview
