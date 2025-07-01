@@ -9,7 +9,7 @@ const HomePage = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // ---- local, optimistic updates ----
+  // ---- this is to get the state changes from child components ----
   const handleStatusChange = (id, newStatus) => setNotes((prev) => prev.map((n) => (n._id === id ? { ...n, status: newStatus } : n)));
 
   const handleDelete = (id) => setNotes((prev) => prev.filter((n) => n._id !== id));

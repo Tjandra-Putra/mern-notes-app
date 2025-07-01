@@ -7,7 +7,7 @@ import axiosInstance from "@/lib/axios";
 import { useState } from "react";
 import { toast } from "sonner";
 
-const TodoCard = ({ category, createdAt, title, description, id, status, onStatusChange, onDelete }) => {
+const TodoCard = ({ category, createdAt, title, description, _id, status, onStatusChange, onDelete }) => {
   const [isDone, setIsDone] = useState(status === "Done");
 
   const updateStatus = async (checked) => {
@@ -17,8 +17,8 @@ const TodoCard = ({ category, createdAt, title, description, id, status, onStatu
     setIsDone(checked);
 
     try {
-      await axiosInstance.put(`/notes/${id}`, { status: newStatus });
-      onStatusChange(id, newStatus); // ← tell parent
+      await axiosInstance.put(`/notes/${_id}`, { status: newStatus });
+      onStatusChange(_id, newStatus); // ← tell parent
 
       setIsDone(checked);
       toast.success(`Todo marked as ${newStatus.toLowerCase()}`);
@@ -32,10 +32,10 @@ const TodoCard = ({ category, createdAt, title, description, id, status, onStatu
 
   const deleteTodo = async () => {
     try {
-      await axiosInstance.delete(`/notes/${id}`).then((res) => {
+      await axiosInstance.delete(`/notes/${_id}`).then((res) => {
         console.log("Response from server:", res.data.message);
       });
-      onDelete(id); // ← tell parent to remove this todo
+      onDelete(_id); // ← tell parent to remove this todo
       toast.success("Todo deleted successfully");
     } catch (err) {
       console.error("Error deleting todo:", err);

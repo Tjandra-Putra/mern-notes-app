@@ -29,7 +29,7 @@ export default function AddToDo() {
       title: "",
       description: "",
       category: "Other",
-      status: "Todo",
+      status: "Draft",
     },
   });
 

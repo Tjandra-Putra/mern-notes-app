@@ -3,10 +3,10 @@ import TodoCard from "@/components/TodoCard";
 import { Badge } from "@/components/ui/badge";
 
 const COLUMNS = [
+  { key: "Draft", label: "Draft", bg: "bg-gray-50", badge: "bg-gray-700" },
   { key: "Todo", label: "To‑do", bg: "bg-red-50", badge: "bg-red-700" },
   { key: "Doing", label: "Doing", bg: "bg-yellow-50", badge: "bg-yellow-700" },
   { key: "Done", label: "Done", bg: "bg-green-50", badge: "bg-green-700" },
-  { key: "Draft", label: "Draft", bg: "bg-gray-50", badge: "bg-gray-700" },
 ];
 
 const sortByNewest = (a, b) => new Date(b.createdAt) - new Date(a.createdAt);
@@ -23,20 +23,13 @@ export default function TodoGrid({ data = [], onStatusChange, onDelete }) {
               <Badge className={badge}>{label}</Badge>
             </header>
 
+            {/* scroll area */}
             <div className="flex flex-col gap-4 overflow-y-auto p-4 max-h-[calc(100vh-12rem)]">
-              {items.map((item) => (
-                <TodoCard
-                  key={item._id}
-                  id={item._id}
-                  category={item.category}
-                  createdAt={item.createdAt}
-                  title={item.title}
-                  description={item.content}
-                  status={item.status}
-                  onStatusChange={onStatusChange}
-                  onDelete={onDelete}
-                />
-              ))}
+              {items.length === 0 ? (
+                <p className="text-xs text-gray-500 italic self-center">No items in this column</p>
+              ) : (
+                items.map((item) => <TodoCard key={item._id} {...item} onStatusChange={onStatusChange} onDelete={onDelete} />)
+              )}
             </div>
           </section>
         );
