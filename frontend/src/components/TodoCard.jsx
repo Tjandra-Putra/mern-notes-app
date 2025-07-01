@@ -5,8 +5,9 @@ import { formatDateTime } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import axiosInstance from "@/lib/axios";
 import { useState } from "react";
+import { toast } from "sonner";
 
-const TodoCard = ({ category, createdAt, title, description, id, status }) => {
+const TodoCard = ({ category, createdAt, title, description, id, status, onStatusChange, onDelete }) => {
   const [isDone, setIsDone] = useState(status === "Done");
 
   const updateStatus = async (checked) => {
@@ -16,15 +17,29 @@ const TodoCard = ({ category, createdAt, title, description, id, status }) => {
     setIsDone(checked);
 
     try {
-      await axiosInstance.put(`/notes/${id}`, { status: newStatus }).then((res) => {
-        console.log("Response from server:", res.data.message);
-      });
+      await axiosInstance.put(`/notes/${id}`, { status: newStatus });
+      onStatusChange(id, newStatus); // ← tell parent
 
       setIsDone(checked);
+      toast.success(`Todo marked as ${newStatus.toLowerCase()}`);
     } catch (err) {
       console.error("Error updating status:", err);
       // rollback UI if request fails
       setIsDone(!checked);
+      toast.error(`Error updating todo status: ${err.response?.data?.message || "Please try again later"}`);
+    }
+  };
+
+  const deleteTodo = async () => {
+    try {
+      await axiosInstance.delete(`/notes/${id}`).then((res) => {
+        console.log("Response from server:", res.data.message);
+      });
+      onDelete(id); // ← tell parent to remove this todo
+      toast.success("Todo deleted successfully");
+    } catch (err) {
+      console.error("Error deleting todo:", err);
+      toast.error(`Error deleting todo: ${err.response?.data?.message || "Please try again later"}`);
     }
   };
 
@@ -44,10 +59,10 @@ const TodoCard = ({ category, createdAt, title, description, id, status }) => {
         <h2 className="text-sm font-medium leading-tight">{title}</h2>
         <p className="text-xs text-gray-800 mt-2">{description}</p>
         <div className="mt-4 flex justify-end">
-          <Button variant="outline" size="sm" className="mr-2">
+          <Button variant="outline" size="sm" className="mr-2" onClick={() => console.log("Edit clicked")}>
             Edit
           </Button>
-          <Button variant="secondary" size="sm">
+          <Button variant="secondary" size="sm" onClick={deleteTodo} className="hover:bg-red-500 hover:text-white">
             Delete
           </Button>
         </div>

@@ -9,6 +9,11 @@ const HomePage = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // ---- local, optimistic updates ----
+  const handleStatusChange = (id, newStatus) => setNotes((prev) => prev.map((n) => (n._id === id ? { ...n, status: newStatus } : n)));
+
+  const handleDelete = (id) => setNotes((prev) => prev.filter((n) => n._id !== id));
+
   useEffect(() => {
     const fetchNotes = async () => {
       try {
@@ -41,7 +46,7 @@ const HomePage = () => {
 
       {loading && "Loading..."}
 
-      {!isRateLimited && !loading && <TodoGrid data={notes} />}
+      {!isRateLimited && !loading && <TodoGrid data={notes} onStatusChange={handleStatusChange} onDelete={handleDelete} />}
     </div>
   );
 };

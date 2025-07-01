@@ -11,7 +11,7 @@ const COLUMNS = [
 
 const sortByNewest = (a, b) => new Date(b.createdAt) - new Date(a.createdAt);
 
-export default function TodoGrid({ data = [] }) {
+export default function TodoGrid({ data = [], onStatusChange, onDelete }) {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {COLUMNS.map(({ key, label, bg, badge }) => {
@@ -33,6 +33,8 @@ export default function TodoGrid({ data = [] }) {
                   title={item.title}
                   description={item.content}
                   status={item.status}
+                  onStatusChange={onStatusChange}
+                  onDelete={onDelete}
                 />
               ))}
             </div>
