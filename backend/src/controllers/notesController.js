@@ -26,10 +26,10 @@ export async function createNote(req, res) {
 
 export async function updateNote(req, res) {
   try {
-    const { title, content } = req.body;
+    const { title, content, status } = req.body;
     const { id } = req.params;
 
-    const updatedNote = await Note.findByIdAndUpdate(id, { title, content }, { new: true });
+    const updatedNote = await Note.findByIdAndUpdate(id, { title, content, status }, { new: true });
 
     if (!updatedNote) {
       return res.status(404).json({ message: "Note not found" });

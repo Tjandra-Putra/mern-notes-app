@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import RateLimitedAlert from "@/components/RateLimitedAlert";
 import TodoGrid from "@/components/TodoGrid";
-import axios from "axios";
+import axiosInstance from "@/lib/axios";
 import { toast } from "sonner";
 
 const HomePage = () => {
@@ -12,7 +12,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/api/notes");
+        const response = await axiosInstance.get("/notes");
         const data = response.data;
 
         setNotes(data);

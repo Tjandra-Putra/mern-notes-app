@@ -8,7 +8,12 @@ import Navbar from "./components/Navbar";
 const App = () => {
   return (
     <div className="bg-white">
-      <div className="w-full max-w-7xl mx-auto min-h-screen">
+      <div
+        className="w-full /* stretch with the viewport */
+          max-w-none
+          px-6
+          min-h-screen"
+      >
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />

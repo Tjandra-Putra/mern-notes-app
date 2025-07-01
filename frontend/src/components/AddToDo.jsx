@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import axios from "axios";
+import axiosInstance from "@/lib/axios";
 
 const FormSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -36,7 +36,7 @@ export default function AddToDo() {
   const onSubmit = async (data) => {
     // submit to server
     try {
-      const response = await axios.post("http://localhost:5001/api/notes", data);
+      const response = await axiosInstance.post("/notes", data);
       toast("You submitted the following values", {
         description: (
           <pre className="mt-2 w-[320px] rounded-md bg-neutral-950 p-4">
@@ -56,10 +56,10 @@ export default function AddToDo() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="flex items-center gap-2 rounded bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700">
+        <div className="flex items-center gap-2 rounded bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 cursor-pointer h-10">
           <Plus className="h-4 w-4" />
           Add Todo
-        </button>
+        </div>
       </DialogTrigger>
 
       <DialogContent>
