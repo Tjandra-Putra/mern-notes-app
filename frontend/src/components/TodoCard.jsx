@@ -1,8 +1,9 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "./ui/badge";
+import { formatDate } from "@/lib/utils";
 
-const TodoCard = ({ category, createdDate, title, description }) => {
+const TodoCard = ({ category, createdAt, title, description }) => {
   return (
     <div>
       <div className="bg-white p-4 rounded-lg shadow">
@@ -11,7 +12,7 @@ const TodoCard = ({ category, createdDate, title, description }) => {
             {category.charAt(0).toUpperCase() + category.slice(1)}
           </Badge>
 
-          <p className="text-xs font-medium text-gray-500">{createdDate}</p>
+          <p className="text-xs font-medium text-gray-500">{formatDate(createdAt)}</p>
         </div>
         <h2 className="text-sm font-medium leading-tight">{title}</h2>
         <p className="text-xs text-gray-800 mt-2">{description}</p>

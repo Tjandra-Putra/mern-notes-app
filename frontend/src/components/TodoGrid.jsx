@@ -1,6 +1,7 @@
 import React from "react";
 import TodoCard from "@/components/TodoCard";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router";
 
 const TodoGrid = ({ data }) => {
   return (
@@ -13,7 +14,9 @@ const TodoGrid = ({ data }) => {
           {data
             .filter((item) => item.status === "Todo")
             .map((item) => (
-              <TodoCard key={item.id} category={item.category} createdDate={item.createdDate} title={item.title} description={item.description} />
+              <Link key={item._id} to={`/note/${item._id}`}>
+                <TodoCard key={item._id} category={item.category} createdAt={item.createdAt} title={item.title} description={item.description} />
+              </Link>
             ))}
         </div>
       </section>
@@ -26,7 +29,9 @@ const TodoGrid = ({ data }) => {
           {data
             .filter((item) => item.status === "Doing")
             .map((item) => (
-              <TodoCard key={item.id} category={item.category} createdDate={item.createdDate} title={item.title} description={item.description} />
+              <Link key={item._id} to={`/note/${item._id}`}>
+                <TodoCard key={item._id} category={item.category} createdAt={item.createdAt} title={item.title} description={item.description} />
+              </Link>
             ))}
         </div>
       </section>
@@ -39,7 +44,9 @@ const TodoGrid = ({ data }) => {
           {data
             .filter((item) => item.status === "Done")
             .map((item) => (
-              <TodoCard key={item.id} category={item.category} createdDate={item.createdDate} title={item.title} description={item.description} />
+              <Link key={item._id} to={`/note/${item._id}`}>
+                <TodoCard key={item._id} category={item.category} createdAt={item.createdAt} title={item.title} description={item.description} />
+              </Link>
             ))}
         </div>
       </section>
@@ -52,7 +59,9 @@ const TodoGrid = ({ data }) => {
           {data
             .filter((item) => item.status === "Draft")
             .map((item) => (
-              <TodoCard key={item.id} category={item.category} createdDate={item.createdDate} title={item.title} description={item.description} />
+              <Link key={item._id} to={`/note/${item._id}`}>
+                <TodoCard key={item._id} category={item.category} createdAt={item.createdAt} title={item.title} description={item.description} />
+              </Link>
             ))}
         </div>
       </section>

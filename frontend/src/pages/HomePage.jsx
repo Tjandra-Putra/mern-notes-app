@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import RateLimitedAlert from "@/components/RateLimitedAlert";
 import TodoGrid from "@/components/TodoGrid";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 const HomePage = () => {
   const [isRateLimited, setIsRateLimited] = useState(false);
@@ -39,7 +39,9 @@ const HomePage = () => {
     <div className="">
       {isRateLimited && <RateLimitedAlert />}
 
-      <TodoGrid data={notes} />
+      {loading && "Loading..."}
+
+      {!isRateLimited && !loading && <TodoGrid data={notes} />}
     </div>
   );
 };
