@@ -7,7 +7,7 @@ import axiosInstance from "@/lib/axios";
 import { useState } from "react";
 import { toast } from "sonner";
 
-const TodoCard = ({ category, createdAt, title, description, _id, status, setNotes }) => {
+const TodoCard = ({ category, createdAt, title, content, _id, status, setNotes }) => {
   const [isDone, setIsDone] = useState(status === "Done");
 
   const updateStatus = async (checked) => {
@@ -59,7 +59,7 @@ const TodoCard = ({ category, createdAt, title, description, _id, status, setNot
           <p className="text-xs font-medium text-gray-500">{formatDateTime(createdAt)}</p>
         </div>
         <h2 className="text-sm font-medium leading-tight">{title}</h2>
-        <p className="text-xs text-gray-800 mt-2">{description}</p>
+        <p className="text-xs text-gray-800 mt-2">{content}</p>
         <div className="mt-4 flex justify-end">
           {/* <Button variant="outline" size="sm" className="mr-2" onClick={() => console.log("Edit clicked")}>
             Edit

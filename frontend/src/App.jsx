@@ -7,7 +7,8 @@ import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
-    <div className="bg-white">
+    // https://bg.ibelick.com/ <- inspiration for the background
+    <div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
       <div
         className="w-full /* stretch with the viewport */
           max-w-none
